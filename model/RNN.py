@@ -31,7 +31,7 @@ class RNNModel(nn.Module):
     def forward(self, x):
         hidden = torch.zeros(num_layers, x.size(0), hidden_size).to(device)
         x = self.emb(x)
-        x, _ = self.rnn(x, hidden)
+        x, hidden = self.rnn(x, hidden)
         x = self.fc(x)
         return x.view(-1, num_class) # seqlen * batchsize, num_class
 
